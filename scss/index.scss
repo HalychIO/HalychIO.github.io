@@ -1,33 +1,11 @@
+@import "./mixins";
+@import "./variables";
+
 :root {
     --height-header: 50px;
     --padding-header: 8px;
 }
 
-$height-header: 50px;
-$padding-header: 50px;
-
-@mixin height-footer {
-    width: 100%;
-    min-height: $height-header;
-    background-color: rgba(98, 98, 98, 0.5);
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 32px;
-}
-
-@mixin nav {
-    height: $height-header;
-    background-color: rgba(255, 255, 255, 0);
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
 
 * {
     margin: 0;
@@ -146,9 +124,9 @@ html {
 
 .page {
     height: 100%;
-    max-width: 800px;
+    max-width: 1200px;
 
-    background-color: rgba(180, 180, 180, 0.659);
+    background-color: rgba(94, 94, 94, 0.659);
     backdrop-filter: blur(8px);
 
     position: absolute;
@@ -157,6 +135,32 @@ html {
     top: 0;
     bottom: 0;
     margin: auto;
+
+    transition: all 0.8s;
+}
+
+.content {
+    margin: 12px;
+
+}
+
+.contentItem {
+    @include flex-center;
+
+    flex-direction: column;
+    gap: 8px;
+
+    padding: 12px;
+
+    img,
+    p,
+    h2 {
+        width: 100%;
+    }
+
+    img {
+        max-width: 600PX
+    }
 }
 
 .footer {
@@ -164,4 +168,5 @@ html {
 
     backdrop-filter: blur(8px);
     padding: 0px 32px 0px 32px;
+    overflow: hidden;
 }

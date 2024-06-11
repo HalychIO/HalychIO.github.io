@@ -6,12 +6,11 @@
     align-items: center;
 }
 
-@mixin height-footer {
+@mixin heder-footer {
     @include flex-center;
 
     width: 100%;
     min-height: $height-header;
-    background-color: rgba(98, 98, 98, 0.5);
 
     flex-direction: row;
     justify-content: space-between;
@@ -23,7 +22,7 @@
     @include flex-center;
 
     height: $height-header;
-    background-color: rgba(255, 255, 255, 0);
+    
 
     flex-direction: row;
 }

@@ -1,6 +1,14 @@
 import { dataContent } from "./data.js";
 
-let interfaceLanguage = "UA";
+let settings = {
+    "open": true,
+    interfaceLanguage: localStorage.leng || "UA",
+    interfaceTheme: localStorage.theme || "dark"
+}
+
+
+let page = "home";
+
 
 (() => {  // рендер фону
     let stepX = 27.0;
@@ -20,26 +28,59 @@ let interfaceLanguage = "UA";
 })();
 
 
+function openSetings() {
+    settings.open = !settings.open;
+
+    document.getElementById('overlay').style.animationName = settings.open
+        ? "openOverlay"
+        : "closeOverlay";
+
+    document.getElementById('setingsMenu').style.animationName = settings.open
+        ? "openSetingsMenu"
+        : "closeSetingsMenu";
+}
+
+function settingsLeng() {
+    settings.interfaceLanguage = settings.interfaceLanguage == "EN" ? "UA" : "EN";
+
+    localStorage.setItem("leng", settings.interfaceLanguage);
+
+    openPage(page)
+}
+
+function settingsTeheme() {
+    settings.interfaceTheme = settings.interfaceTheme == "dark" ? "light" : "dark";
+
+    localStorage.setItem("teheme", settings.interfaceTheme);
+
+    openPage(page)
+}
+
+function openPage(ID) {
+    page = ID;
+    buttonNavRender();
+    pageRender(page);
+}
 
 function buttonNavRender() {
     let navBar = document.getElementById('navBar');
+    navBar.innerHTML = "";
 
-    Object.keys(dataContent[interfaceLanguage]).forEach((element) => {
+    Object.keys(dataContent[settings.interfaceLanguage]).forEach((element) => {
         let createTeg = document.createElement("button");
         createTeg.className = "navPoint";
-        createTeg.textContent = dataContent[interfaceLanguage][element].h1;
+        createTeg.textContent = dataContent[settings.interfaceLanguage][element].h1;
         createTeg.onclick = () => openPage(element);
 
         navBar.appendChild(createTeg);
     })
 }
-buttonNavRender()
 
-const openPage = (OpenID) => {
+const pageRender = (OpenID) => {
     let divContent = document.getElementById("content");
     divContent.innerHTML = "";
 
-    dataContent[interfaceLanguage][OpenID].content.forEach(element => {
+    dataContent[settings.interfaceLanguage][OpenID].content.forEach(element => {
         let addElem = Object.keys(element);
         let div = document.createElement("div");
         div.className = "contentItem";
@@ -48,16 +89,26 @@ const openPage = (OpenID) => {
             let createTeg = document.createElement(elem);
 
             elem !== "img" ?
-                createTeg.textContent = element[elem] :
-                createTeg.src = element[elem];
+                createTeg.textContent = element[elem].text :
+                createTeg.src = element[elem].path;
+
+            createTeg.className = element[elem].style;
+
+            div.appendChild(createTeg);
 
             div.appendChild(createTeg);
         });
 
         divContent.appendChild(div);
     });
-
-
 }
-openPage("home");
+
+document.getElementById('buttonSettings').onclick = () => openSetings();
+document.getElementById('setingsMenuButtonsLang').onclick = () => settingsLeng();
+document.getElementById('setingsMenuButtonsTheme').onclick = () => settingsTeheme();
+document.getElementById('overlay').onclick = () => openSetings();
+
+openPage(page);
+// settingsTeheme();
+
 

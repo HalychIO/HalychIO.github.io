@@ -1,13 +1,60 @@
+@keyframes closeOverlay {
+  0% {
+    opacity: 100%;
+    display: block;
+  }
+  100% {
+    opacity: 0%;
+    display: none;
+  }
+}
+@keyframes openOverlay {
+  0% {
+    display: none;
+  }
+  100% {
+    display: block;
+    opacity: 100%;
+  }
+}
+@keyframes closeSetingsMenu {
+  0% {
+    display: flex;
+    height: 116px;
+    padding: 12px;
+  }
+  100% {
+    display: flex;
+    height: 0;
+    padding: 0 12px;
+  }
+}
+@keyframes openSetingsMenu {
+  0% {
+    display: flex;
+    height: 0;
+    padding: 0 12px;
+  }
+  100% {
+    display: flex;
+    height: 116px;
+    padding: 12px;
+  }
+}
 :root {
   --height-header: 50px;
   --padding-header: 8px;
+  --text-color: #ffffff;
+  --layout-background-color: rgba(98, 98, 98, 0.5);
+  --layout-background-color2: rgb(209, 209, 209);
+  --body-background-color: rgb(21, 21, 21);
+  --body-background-color2: rgb(0, 0, 0);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: 0.5s;
   color: rgb(255, 255, 255);
 }
 
@@ -21,7 +68,6 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
   background-size: cover;
 }
 
@@ -40,11 +86,11 @@ html {
   align-items: center;
   width: 100%;
   min-height: 50px;
-  background-color: rgba(98, 98, 98, 0.5);
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 32px;
+  background-color: var(--layout-background-color);
   -webkit-backdrop-filter: blur(18px);
           backdrop-filter: blur(18px);
 }
@@ -57,11 +103,11 @@ html {
 
 .navBar {
   width: 40%;
+  background-color: rgba(255, 255, 255, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: rgba(255, 255, 255, 0);
   flex-direction: row;
 }
 
@@ -69,48 +115,78 @@ html {
   width: 150px;
   text-decoration: none;
   border: none;
+  transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 50px;
-  background-color: rgba(255, 255, 255, 0);
   flex-direction: row;
 }
 
 .navPoint:hover {
   background-color: rgba(0, 0, 0, 0.345);
+  transition: 0.3s;
 }
 
 .buttonSettings {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
   border-radius: 24px;
-  width: calc(var(--height-header) - var(--padding-header));
-  height: calc(var(--height-header) - var(--padding-header));
+  width: 38px;
+  height: 38px;
+}
+
+.settingsIcon {
+  width: 100%;
+  height: 100%;
+  fill: rgba(98, 98, 98, 0.5);
+  transition: 0.3s;
+}
+
+.settingsIcon:hover {
+  fill: rgb(209, 209, 209);
+}
+
+.overlay {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: calc(100vh - 50px);
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  animation-name: closeOverlay;
+  animation-duration: 0.1s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .setingsMenu {
   position: absolute;
-  top: var(--height-header);
-  width: 100%;
-  height: calc(100vh - var(--height-header));
-  background-color: rgba(0, 0, 0, 0.383);
-  -webkit-backdrop-filter: blur(100px);
-          backdrop-filter: blur(100px);
+  top: 50px;
+  right: 0;
   overflow: hidden;
-  gap: 16px;
-  padding: var(--padding-header);
+  gap: 12px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: end;
   align-items: end;
-  display: none;
+  animation-name: closeSetingsMenu;
+  animation-duration: 0.3s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 .setingsMenuButtons {
   height: 40px;
   width: 200px;
+  flex-shrink: 0;
   border: none;
   border-radius: 50px;
   background-color: rgb(255, 255, 255);
+  color: black;
 }
 
 .main {
@@ -120,6 +196,7 @@ html {
 }
 
 .page {
+  overflow-y: scroll;
   height: 100%;
   max-width: 1200px;
   background-color: rgba(94, 94, 94, 0.659);
@@ -161,13 +238,22 @@ html {
   align-items: center;
   width: 100%;
   min-height: 50px;
-  background-color: rgba(98, 98, 98, 0.5);
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 32px;
+  background-color: var(--layout-background-color);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
   padding: 0px 32px 0px 32px;
   overflow: hidden;
+}
+
+.styleAvatar {
+  border: none;
+  border-radius: 24px;
+}
+
+.styleText {
+  color: inherit;
 }/*# sourceMappingURL=index.css.map */

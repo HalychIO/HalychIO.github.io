@@ -1,21 +1,27 @@
 @import "./mixins";
 @import "./variables";
+@import "./animations";
 
 :root {
     --height-header: 50px;
     --padding-header: 8px;
-}
 
+    --text-color: #ffffff;
+
+    --layout-background-color: rgba(98, 98, 98, 0.5);
+    --layout-background-color2: rgb(209, 209, 209);
+
+    --body-background-color: rgb(21, 21, 21);
+    --body-background-color2: rgb(0, 0, 0);
+
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: 0.5s;
 
     color: rgb(255, 255, 255);
-
-
 }
 
 html {
@@ -30,7 +36,7 @@ html {
     flex-direction: column;
     align-items: center;
 
-    position: relative;
+    // position: relative;
     background-size: cover;
 }
 
@@ -45,7 +51,9 @@ html {
 }
 
 .header {
-    @include height-footer;
+    @include heder-footer;
+
+    background-color: var(--layout-background-color);
 
     backdrop-filter: blur(18px);
 }
@@ -58,7 +66,7 @@ html {
 
 .navBar {
     width: 40%;
-
+    background-color: rgba(255, 255, 255, 0);
     @include nav;
 }
 
@@ -66,51 +74,85 @@ html {
     width: 150px;
     text-decoration: none;
     border: none;
-
+    transition: 0.3s;
+    background-color: rgba(255, 255, 255, 0);
     @include nav;
 }
 
 .navPoint:hover {
     background-color: rgba(0, 0, 0, 0.345);
+    transition: 0.3s;
 }
 
 .buttonSettings {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 24px;
-    width: calc(var(--height-header) - var(--padding-header));
-    height: calc(var(--height-header) - var(--padding-header));
+    width: $height-header - $padding-header;
+    height: $height-header - $padding-header;
+}
+
+.settingsIcon {
+    width: 100%;
+    height: 100%;
+    fill: $color-nav;
+    transition: 0.3s;
+}
+
+.settingsIcon:hover {
+    fill: $color-nav-exudation;
+}
+
+.overlay {
+
+    position: absolute;
+    top: $height-header;
+
+    width: 100%;
+    height: calc(100vh - $height-header);
+
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(3px);
+
+    animation-name: closeOverlay;
+    animation-duration: 0.1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+
 }
 
 .setingsMenu {
 
     position: absolute;
-    top: var(--height-header);
-
-    width: 100%;
-    height: calc(100vh - var(--height-header));
-
-    background-color: rgba(0, 0, 0, 0.383);
-    backdrop-filter: blur(100px);
+    top: $height-header;
+    right: 0;
 
     overflow: hidden;
-    gap: 16px;
-    padding: var(--padding-header);
+    gap: $padding-header;
+    padding: $padding-header;
 
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: end;
     align-items: end;
 
-    display: none;
-
+    animation-name: closeSetingsMenu;
+    animation-duration: 0.3s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
 
 .setingsMenuButtons {
     height: 40px;
     width: 200px;
 
+    flex-shrink: 0;
+
     border: none;
     border-radius: 50px;
     background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 .main {
@@ -123,6 +165,8 @@ html {
 }
 
 .page {
+    overflow-y: scroll;
+
     height: 100%;
     max-width: 1200px;
 
@@ -164,9 +208,20 @@ html {
 }
 
 .footer {
-    @include height-footer;
+    @include heder-footer;
+
+    background-color: var(--layout-background-color);
 
     backdrop-filter: blur(8px);
     padding: 0px 32px 0px 32px;
     overflow: hidden;
+}
+
+.styleAvatar {
+    border: none;
+    border-radius: 24px;
+}
+
+.styleText {
+    color: inherit;
 }

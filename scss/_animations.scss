@@ -1,0 +1,53 @@
+@import "./variables";
+
+@keyframes closeOverlay {
+    0% {
+        opacity: 100%;
+        display: block;
+    }
+
+    100% {
+        opacity: 0%;
+        display: none;
+    }
+}
+
+@keyframes openOverlay {
+    0% {
+        display: none;
+    }
+
+    100% {
+        display: block;
+        opacity: 100%;
+    }
+}
+
+@keyframes closeSetingsMenu {
+    0% {
+        display: flex;
+        height: $padding-header * 3 + 80px;
+        padding: $padding-header;
+
+    }
+
+    100% {
+        display: flex;
+        height: 0;
+        padding: 0 $padding-header;
+    }
+}
+
+@keyframes openSetingsMenu {
+    0% {
+        display: flex;
+        height: 0;
+        padding: 0 $padding-header;
+    }
+
+    100% {
+        display: flex;
+        height: $padding-header * 3 + 80px;
+        padding: $padding-header;
+    }
+}
